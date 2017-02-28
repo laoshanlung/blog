@@ -1,4 +1,5 @@
 #!/bin/bash
+hugo
 ssh dokku@tannguyen.org apps:create tannguyen.org
 touch public/.static
 cp -fv .dokku/* public

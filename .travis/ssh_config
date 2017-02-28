@@ -1,0 +1,6 @@
+Host tannguyen.org
+StrictHostKeyChecking no
+User dokku
+PasswordAuthentication no
+CheckHostIP no
+BatchMode yes

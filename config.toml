@@ -1,0 +1,28 @@
+theme="hugo-geo"
+languageCode = "en-us"
+title = "Tan Nguyen"
+baseurl = "http://tannguyen.org/"
+paginate = 10
+
+PygmentsCodeFences = true
+pygmentsstyle = "emacs"
+
+[params]
+  showglobe = false
+
+  favicon = "favicon.png"
+
+  header = "(╯°□°）╯︵ ┻━┻"
+
+  github = "https://github.com/laoshanlung"
+  facebook = "https://facebook.com/hoangtan"
+  linkedin = "https://www.linkedin.com/in/tan-nguyen-b9425a25/"
+
+  profilepic = "images/profilepic.jpg"
+
+  subtitle = "I build random stuff"
+
+  css = "css/custom.css"
+
+[permalinks]
+  post = "/:year/:month/:title/"

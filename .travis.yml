@@ -11,7 +11,7 @@ python:
 before_install:
   - openssl aes-256-cbc -K $encrypted_b2a3a07f2f2c_key -iv $encrypted_b2a3a07f2f2c_iv -in .travis/deploy_key.pem.enc -out .travis/deploy_key.pem -d
 
-before_script: false
+script: false
 
 install:
   - go get -v github.com/spf13/hugo

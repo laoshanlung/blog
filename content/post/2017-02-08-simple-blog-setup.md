@@ -97,7 +97,7 @@ travis encrypt-file ./.travis/deploy_key.pem
 rm ./.travis/deploy_key.pem
 ```
 
-Now that I have the encrypted version of the private key, I need to tell Travis to decrypt it before it can use it. There is a `before_install` hook to do that.
+Now that I have the encrypted version of the private key, I need to tell Travis to decrypt it before it can use it. There is a `before_install` hook to do that. After `travis encrypt-file` command, Travis creates 2 environment variables for your project (check the settings tab), it will use those variables to encrypt the file later.
 
 ```
 before_install:

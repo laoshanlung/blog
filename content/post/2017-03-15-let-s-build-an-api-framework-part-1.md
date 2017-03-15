@@ -157,3 +157,5 @@ module.exports = {
 ```
 
 This approach is simple but very powerful as it allow granular control of the routes.
+
+In the next 2 parts, I am going to implement an API framework following the above design.

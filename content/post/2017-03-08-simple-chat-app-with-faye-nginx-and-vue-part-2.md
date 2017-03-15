@@ -1,7 +1,7 @@
 +++
 date = "2017-03-08T21:55:22+02:00"
 title = "Build a simple chat web app using Faye, Express and Vue - Part 2"
-tags = ['nodejs', 'express', 'javascript']
+tags = ['nodejs', 'express', 'javascript', 'passportjs']
 categories = ['Programming']
 +++
 

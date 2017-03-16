@@ -1,7 +1,7 @@
 +++
 date = "2017-03-15T20:54:07+02:00"
 title = "Let's build an API framework - Part 1"
-tags = ['nodejs', 'javascript', 'expressjs']
+tags = ['nodejs', 'javascript', 'express']
 categories = ['Programming']
 +++
 
@@ -42,10 +42,10 @@ module.exports = {
 }
 ```
 
-The final API is the path to the file and whatever defined in `path`.
+The final API is the path to the file or whatever defined in `path`.
 
 - If the file path is `v1/posts/list.js` and there is no `path` specified, the final API path is `/v1/posts/list`.
-- If the file path is `v1/posts/list.js` and the route set `path` to `/`, the final API path is `/v1/posts`
+- If the file path is `v1/posts/list.js` and the route set `path` to `v1/posts`, the final API path is `/v1/posts`
 
 There are also options to specify the `prefix` and where to look for routes during the initialization.
 

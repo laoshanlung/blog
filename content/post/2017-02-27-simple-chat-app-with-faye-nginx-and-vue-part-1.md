@@ -199,6 +199,6 @@ CREATE TABLE messages (
 DROP TABLE messages;
 ```
 
-With this I have the first part of the application ready. The source code can be found here [https://github.com/laoshanlung/simple-chat-api](https://github.com/laoshanlung/simple-chat-api/tree/part-1).
+With this I have the first part of the application ready. The source code can be found here [https://github.com/tanqhnguyen/simple-chat-api](https://github.com/tanqhnguyen/simple-chat-api/tree/part-1).
 
 In the next part, I am going to write about the authentication and authorization process using [Passport](http://passportjs.org/).

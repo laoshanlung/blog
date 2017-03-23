@@ -59,4 +59,4 @@ after_success:
   - cp -fv .dokku/* public
 ```
 
-If you are curious about the final setup, you can take a look at [the source code](https://github.com/laoshanlung/blog)
+If you are curious about the final setup, you can take a look at [the source code](https://github.com/tanqhnguyen/blog)

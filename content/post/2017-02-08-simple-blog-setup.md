@@ -151,4 +151,4 @@ git push dokku master -f
 
 And with that I have a fully automatic deployment process. Now I just need to focus on blogging and let Travis handle the deployment.
 
-The source code for my blog can be found [here](https://github.com/laoshanlung/blog). There are some extra stuff such as syntax highlighting and custom nginx config. I will cover them in another post.
+The source code for my blog can be found [here](https://github.com/tanqhnguyen/blog). There are some extra stuff such as syntax highlighting and custom nginx config. I will cover them in another post.

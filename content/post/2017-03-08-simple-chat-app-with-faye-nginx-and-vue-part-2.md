@@ -190,4 +190,4 @@ router.delete('/:id(\\d+)', authenticated(), checkAuthor(), (req, res) => {
 
 With all that in place, I have an ok-ish API server with all the basic stuff such as authentication, authorization and data persistence. In the next part, I am going to implement the pub/sub messaging server and integrate it to the API server.
 
-The code for this part can be found at [https://github.com/laoshanlung/simple-chat-api](https://github.com/laoshanlung/simple-chat-api/tree/part-2).
+The code for this part can be found at [https://github.com/tanqhnguyen/simple-chat-api](https://github.com/tanqhnguyen/simple-chat-api/tree/part-2).

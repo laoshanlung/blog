@@ -9,7 +9,7 @@ Today, I am going to take a break from the simple chat app series because I want
 
 <!--more-->
 
-For the project that I am working one, I came up with an idea on how to build an API on top of the famous [Express](https://expressjs.com/) framework. It is actually not new because I have used a similar concept for a project I did 4 or 5 years ago, and I bet somebody somewhere has already created a similar (or exactly the same) one. This is (yet) another series on how I build a simple API framework on top of other existing frameworks such as Express. There are 3 parts, the first part (this post) is for the design of the framework. The next 2 parts are for the implementation.
+For the project that I am working one, I came up with an idea on how to build an API on top of the famous [Express](https://expressjs.com/) framework. It is actually not new because I have used a similar concept for a project I did 4 or 5 years ago, and I bet somebody somewhere has already created a similar (or exactly the same) one. This is (yet) another series on how I build a simple API framework on top of other existing frameworks such as Express. There are 2 parts, the first part (this post) is for the design of the framework. The next part is for the implementation.
 
 ## Basic requirements for an API framework
 During my short time of working with APIs (and building them). I can see there are several basic needs for an API framework to make it easier and faster to build an API.
@@ -38,7 +38,7 @@ Each file defines a set of options to let the framework know how to construct a 
 module.exports = {
   method: 'get',
   path: '/',
-  handler: function() {}
+  handle: function() {}
 }
 ```
 
@@ -50,12 +50,13 @@ The final API is the path to the file or whatever defined in `path`.
 There are also options to specify the `prefix` and where to look for routes during the initialization.
 
 ```
-const Api = require('ohmyapi');
+const ohmyapi = require('ohmyapi');
 
-const api = new Api({
-  routes: __dirname + '/api',
-  prefix: '/api'
-});
+const api = ohmyapi(__dirname + '/api')
+              .engine('express', {
+                prefix: '/api'
+              })
+              .init();
 ```
 
 ## Arguments and context
@@ -74,7 +75,7 @@ Input validation varies from string matching to make sure that an email does not
 module.exports = {
   method: 'post',
   path: '/members',
-  handler: function(args, ctx) {},
+  handle: function(args, ctx) {},
   args: {
     name: {
       string: true,
@@ -105,25 +106,24 @@ The validation process happens right after receiving the request, and it makes s
 The authentication happens in a simple function provided when initializing the framework. This function returns the identity of the current request or `null` to indicate that the request is anonymous.
 
 ```
-const Api = require('ohmyapi'),
+const ohmyapi = require('ohmyapi'),
       jwt = require('jsonwebtoken');
 
-const api = new Api({
-  authenticate: function(args, context) {
-    // for example, get the user from the web token
-    jwt.verify(context.cookies.token, cert, function(err, decoded) {
-      if (err) return cb(err);
-      callback(null, decoded.user);
-    });
-    // or the Promise version
-    return new Promise(function(resolve, reject) {
-      jwt.verify(context.cookies.token, cert, function(err, decoded) {
-        if (err) return reject(err);
-        resolve(decoded.user);
-      });
-    });
-  }
-});
+const api = ohmyapi(__dirname + '/api')
+            .validate(function(args, context) {
+              // for example, get the user from the web token
+              jwt.verify(context.cookies.token, cert, function(err, decoded) {
+                if (err) return cb(err);
+                callback(null, decoded.user);
+              });
+              // or the Promise version
+              return new Promise(function(resolve, reject) {
+                jwt.verify(context.cookies.token, cert, function(err, decoded) {
+                  if (err) return reject(err);
+                  resolve(decoded.user);
+                });
+              });
+            }).init();
 ```
 
 Then the route can specify whether it needs authentication or not. It's quite often that I want an API to be public.
@@ -133,7 +133,7 @@ module.exports = {
   method: 'get',
   path: '/members',
   handler: function() {},
-  authenticated: true
+  authenticate: true
 }
 ```
 
@@ -144,8 +144,8 @@ This process comes right after the authentication. There are many ways to do aut
 module.exports = {
   method: 'get',
   path: '/members',
-  handler: function() {},
-  authenticated: true,
+  handle: function() {},
+  authenticate: true,
   authorize: function(args, ctx) {},
   // or an array of functions, if any of them returns false,
   // the request fails

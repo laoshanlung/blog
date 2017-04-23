@@ -33,7 +33,7 @@ POST /api/v1/posts -> /project-name/api/v1/posts/create.js
 
 Each file defines a set of options to let the framework know how to construct a particular path. For example
 
-```
+```javascript
 // /project-name/api/v1/posts/list.js
 module.exports = {
   method: 'get',
@@ -49,7 +49,7 @@ The final API is the path to the file or whatever defined in `path`.
 
 There are also options to specify the `prefix` and where to look for routes during the initialization.
 
-```
+```javascript
 const ohmyapi = require('ohmyapi');
 
 const api = ohmyapi(__dirname + '/api')
@@ -71,7 +71,7 @@ The validation process is there to make sure that only valid arguments are passe
 
 Input validation varies from string matching to make sure that an email does not exist in the database. The validation rules are defined in the route itself.
 
-```
+```javascript
 module.exports = {
   method: 'post',
   path: '/members',
@@ -105,7 +105,7 @@ The validation process happens right after receiving the request, and it makes s
 ## Authentication
 The authentication happens in a simple function provided when initializing the framework. This function returns the identity of the current request or `null` to indicate that the request is anonymous.
 
-```
+```javascript
 const ohmyapi = require('ohmyapi'),
       jwt = require('jsonwebtoken');
 
@@ -128,7 +128,7 @@ const api = ohmyapi(__dirname + '/api')
 
 Then the route can specify whether it needs authentication or not. It's quite often that I want an API to be public.
 
-```
+```javascript
 module.exports = {
   method: 'get',
   path: '/members',
@@ -140,7 +140,7 @@ module.exports = {
 ## Authorization
 This process comes right after the authentication. There are many ways to do authorization such as role-based access control list. But for `ohmyapi`, I am going to use a much simpler approach. Each route has its own authorization functions, and those functions verify the request to make sure that it has sufficient permissions to access the route.
 
-```
+```javascript
 module.exports = {
   method: 'get',
   path: '/members',

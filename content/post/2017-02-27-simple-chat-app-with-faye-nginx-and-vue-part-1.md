@@ -23,7 +23,8 @@ In the first part, I am going to start with setting up the API server and a simp
 I love to work with Express because it only takes several minutes to get the server up and running. It provides a thin layer on top of the native http module in Nodejs but still allows a wide range of customization to be done easily.
 
 I will go with REST because I don't see any point in doing something fancy like GraphQL for this trival app. At its simplest form, the API server looks like this
-```
+
+```javascript
 // app.js
 const express = require('express'),
       bodyParser = require('body-parser'),
@@ -59,7 +60,7 @@ For security purposes, I don't store any passwords, API keys in git repository (
 
 For example, when I set the database connection variable to the environment variable called `psql__host`, I can get it by calling `config.get('psql.host')`.
 
-```
+```javascript
 // config/index.js
 const _ = require('lodash'),
       yaml = require('js-yaml');
@@ -102,7 +103,7 @@ Then with a simple recursive function I can loop through all the files and const
 
 However, in this small project, I just go with a simple router file containing 4 end points for interacting with `messages` resource. There is no end point to get one message because I am not going to support that in the UI.
 
-```
+```javascript
 // routes/messages.js
 const express = require('express'),
       router = express.Router();
@@ -143,7 +144,7 @@ DELETE /messages/1
 ## Data persistence
 For the purposes of this simple app, I don't need anything fancier than sqlite3 and a bunch of functions, sql queries to store and retrieve data.
 
-```
+```javascript
 // sqlite.js
 const sqlite = require('sqlite'),
       Promise = require('bluebird');
@@ -167,7 +168,7 @@ module.exports = {
 
 I skip all the SQL queries on purpose to present a clearer view of the module. Notice that there is an `up` function that must be called before starting the application to run migration files.
 
-```
+```javascript
 // start.js
 const app = require('./src/app'),
       service = require('./src/service'),

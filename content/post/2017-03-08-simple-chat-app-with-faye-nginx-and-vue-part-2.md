@@ -36,7 +36,7 @@ I also need to add a new method `upsertUser` to `service` to abstract away the "
 ## Authentication
 I am using [PassportJS](http://passportjs.org/) to talk to Github OAuth server. Using the example found in the git repository of [passport-github2](https://github.com/cfsghost/passport-github) and adding some stuff, I have the following `auth.js` router.
 
-```
+```javascript
 const passport = require('passport'),
       GitHubStrategy = require('passport-github2'),
       config = require('../config'),
@@ -92,7 +92,7 @@ If the user fails to authenticate, I just redirect them to the login url so that
 
 In order to use the JSON web token, I also need to add a middleware to express to decrypt it. Fortunately, there is one [express-jwt](https://github.com/auth0/express-jwt)
 
-```
+```javascript
 app.use(jwt({
   secret: config.get('auth.secret'),
   requestProperty: 'token',
@@ -107,7 +107,7 @@ After this, the token can be accessed via `req.token` and it contains whatever I
 
 Now that I have everything ready, I need to have a way to protect the API from unauthenticated requests. However, there are some API that I still want everyone to be able to access as well. In `express`, one can just add a middleware (which is basically a function) to intercept the current request.
 
-```
+```javascript
 function authenticated() {
   return (req, res, next) => {
     const {
@@ -128,7 +128,7 @@ function authenticated() {
 
 The usage is simple, put this middleware in front of the API that needs to be protected. For example
 
-```
+```javascript
 router.post('/', authenticated(), (req, res) => {
   service.createMessage(req.body.content).then(res.jsonData, res.jsonError);
 });
@@ -139,7 +139,7 @@ With this I have the basic authentication part ready. The next step is to contro
 ## Authorization
 In this simple app, there are only 2 roles, `anonymous` and `user` that need to work with the API. An user can only delete/update their own messages. There are several ways of doing authorization, it can be done in the code or at database level (I will have another post about this later). For this chat app, I am going to do it in the code. I am using the same pattern as in the authentication process by defining a middleware to intercept the request.
 
-```
+```javascript
 function checkAuthor() {
   return (req, res, next) => {
     const {
@@ -182,7 +182,7 @@ function checkAuthor() {
 
 And use it in the end points that need to be protected. However, this middleware is not efficient because it needs to call `service.getMessageById`, which issues a sql query, everytime a request comes in. There are ways to optimize it but that is outside the scope of this post.
 
-```
+```javascript
 router.delete('/:id(\\d+)', authenticated(), checkAuthor(), (req, res) => {
   service.deleteMessage(parseInt(req.params.id, 10)).then(res.jsonData, res.jsonError);
 });

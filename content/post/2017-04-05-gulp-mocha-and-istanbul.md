@@ -14,7 +14,7 @@ In my thesis, I am writting a framework consisting of around 10 sub-projects, co
 ## Mocha
 Mocha is a [fun, simple, flexible JavaScript test framework](https://mochajs.org/). It has been around for a very long time. My goal is to have a simple gulp `test` task using `mocha`, so that I can run `gulp test` to test my projects. Since the projects' structure are identical, having a common `test` task is straightforward.
 
-```
+```javascript
 gulp.task('test', function() {
   const cwd = process.cwd();
 
@@ -34,7 +34,7 @@ gulp.task('test', function() {
 
 All the black magic happens in `loadSpecs` which simply goes through all the folders inside `src` folder recursively to load spec files (having `.spec` in the file name)
 
-```
+```javascript
 function getAllFilesFromPath(path) {
   const stat = fs.statSync(path);
   if (stat.isDirectory()) {
@@ -63,7 +63,7 @@ Since this is only for testing, I don't need to optimize anything, just use `sta
 ## Istanbul
 [Istanbul](https://istanbul.js.org/) is a test coverage library to let people know how well their tests cover the source code. Using istanbul from command line is the easiest thing I have seen so far, just run it with `mocha` like this `nyc mocha` and you are good to go. However, using it programmatically requires a bit more work. In fact, I needed to dig around for a solid 57 minutes to figure out how to make it work with `mocha`. The secret sauce is this [hook](https://github.com/istanbuljs/istanbuljs/blob/master/packages/istanbul-lib-hook/lib/hook.js) which can be access through `istanbul.hook`. Let me show the code first and then explain it
 
-```
+```javascript
 const istanbul = require('istanbul')
 
 function hookRequire() {
@@ -97,7 +97,7 @@ Another thing worth noticing is that the whole thing is synchronous because of t
 
 The final piece is to generate a coverage report. In my case I only need 2 reports, `text` and `html`. `text` report is the one you will see when your tests end. `html` report contains a lot more information such as the coverage percentage of each file.
 
-```
+```javascript
 function summarizeCoverage() {
   const cwd = process.cwd();
   const coverage = global.__coverage__;

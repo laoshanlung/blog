@@ -17,7 +17,7 @@ ssh dokku@tannguyen.org apps:create simple-chat-api
 tar --exclude='src/chat.sqlite' -cv src package.json start.js -C .dokku CHECKS | ssh dokku@tannguyen.org tar:in simple-chat-api
 ```
 
-First, I need to create the dokku app named `simple-chat-api`. Then, I can simply do a tar deployment. The tar part is quite tricky. I usually put dokku specific files (`CHECKS` for example) into `.dokku` folder. So, my tar command needs consists of 2 parts
+First, I need to create the dokku app named `simple-chat-api`. Then, I can simply do a tar deployment. The tar part is quite tricky. I usually put dokku specific files (`CHECKS` for example) into `.dokku` folder. So, my tar command consists of 2 parts
 
 - First part gets all the necessary files and folders in the root directory (src, package.json and start.js). Since I am using sqlite, I also want to exclude it
 - Second part changes the working directory to `.dokku` and appends `CHECKS` file to the tar content
@@ -44,7 +44,7 @@ app.use(require('cors')({
 }));
 ```
 
-I can do the same for `faye` service but I will do something else to demonstrate a different way to allow cross-domain communication. The [nginx config](https://github.com/tanqhnguyen/simple-chat-faye/blob/master/.dokku/nginx.conf.sigil) has there 4 extra headers added to allow cross-domain communication
+I can do the same for `faye` service but I will do something else to demonstrate a different way to allow cross-domain communication. The [nginx config](https://github.com/tanqhnguyen/simple-chat-faye/blob/master/.dokku/nginx.conf.sigil) has these 4 extra headers added to allow cross-domain communication
 
 ```
 add_header 'Access-Control-Allow-Origin' 'http://simple-chat.tannguyen.org';

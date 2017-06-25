@@ -5,9 +5,13 @@ tags = ['dokku']
 categories = ['Programming']
 +++
 
-In the previous part, I implemented the UI using Vue. In this part, I am going to write about the deployment process using `dokku`. This simple chat app is split into 3 separate services `api`, `faye` and `web`. Each service can be deployed separately without affecting other running services.
+In the previous part, I implemented the UI using Vue. In this part, I am going to write about the deployment process using `dokku`. This simple chat app is split into 3 separate services `api`, `faye` and `web`. Each service can be deployed independently without affecting other running services.
 
 <!--more-->
+Let's look at the final result first. The application is deployed to [http://simple-chat.tannguyen.org](http://simple-chat.tannguyen.org/#/) which contains the production version (built and minified JS code) of the web UI. This UI connects to the API server at [http://simple-chat-api.tannguyen.org](http://simple-chat-api.tannguyen.org) which contains the code for `api` service. And finally, `faye` service is deployed to [ws://simple-chat-faye.tannguyen.org](ws://simple-chat-faye.tannguyen.org)
+
+This kind of setup seems to be too complicated for this tiny application. However, as the application gets bigger, this setup really shines. Imagine that when your application grows bigger, you will probably have more independent services, let say 10 of them. Once you make new changes to the UI, you probably don't want to deploy the UI code together with all 9 other services which are exactly the same as they were before. With the current state of technology, deploying 9 more services to one server is nothing. But when you have 100 servers, this becomes a huge problem because you are unnecessarily deploying all of your services to all of your servers every time you change one line of code in any of your services. This setup also makes it easier to scale one particular service. Since each service is implemented as an isolated component, I can easily monitor and scale services that are under extensive use.
+
 ## Deploy api service
 Let's look at the final `deploy.sh` script first
 
@@ -68,7 +72,7 @@ tar c dist | ssh dokku@tannguyen.org tar:in simple-chat
 
 First step is to build the production files using webpack. Second step is to tag this deployment as `static` by creating an empty file named `.static` to let dokku know that it should use [nginx-buildpack](https://github.com/dokku/buildpack-nginx) to build `web` app.
 
-## Final thought
-With this final part, I have a very simple chat app with complete deployment process. The only missing piece is a continous integration service to automatically deploy the application.
+## Final thoughts
+With this simple chat app, I have demonstrated how to develop and deploy a project using Nodejs (express, faye), Vue and Dokku. I am using this same kind of structure at work and for my hobby projects. I am pretty happy with it and don't have any problem so far.
 
-I am pretty happy with Vue so far, it offers a nice and fast way to build user interface. However, I think that I will not use it for production yet because it's still quite new which makes it hard to build a team around it.
+I have a positive impression about Vue as a front-end development framework. It's very simple to get into, the learning curve is not as big as I thought. I will definitely use it for my next hobby project, and if possible try to use it at work.

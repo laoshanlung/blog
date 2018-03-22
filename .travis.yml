@@ -14,7 +14,7 @@ before_install:
 script: true
 
 install:
-  - go get -v github.com/spf13/hugo
+  - go get -v github.com/gohugoio/hugo
   - sudo pip install Pygments
 
 after_success:

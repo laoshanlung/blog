@@ -1,11 +1,11 @@
 +++
 date = "2018-01-20T11:52:29+02:00"
-title = "Build a 2048 game - Part 1"
+title = "Build a 2048 game engine"
 tags = ['javascript', 'nodejs', 'game']
 categories = ['Programming']
 +++
 
-Although the game 2048 is not a hot stuff like it used to be several years ago, I am still playing it once in a while. And now I thought that maybe I could try to implement it by myself just to do something else other than web development (well technically speaking it will still be on the web but you get the idea).
+Although the game 2048 is not a hot stuff like it used to be several years ago, I am still playing it once in a while. And now I thought that maybe I could try to implement it by myself just to do something else other than web development.
 
 <!--more-->
 
@@ -13,8 +13,6 @@ Although the game 2048 is not a hot stuff like it used to be several years ago, 
 For those who are not familiar with 2048, it is a puzzle game made by [Gabriele Cirulli](https://gabrielecirulli.com/). I am going to borrow his ideas/concepts and implement my own version of 2048. It's only for fun without any commercial intention or competition with his [original game](https://gabrielecirulli.github.io/2048/).
 
 All of the code that I am going to use is my own code and I do not take any of his original code. I simply play the game, and try to replicate it using my own knowledge gained through playing the game.
-
-The final product will be a web version of the game 2048 with a simple "your dashboard" feature to save your progress and see others score.
 
 ## The game engine
 The engine is the heart of the whole game, it contains all the logic to handle different movements (left, right, up, down) happened during a game session.
@@ -207,7 +205,7 @@ I think in this game, you lose when you can't move tiles anymore. It can be veri
 
 The full source code can be found here [https://github.com/tanqhnguyen/2048-engine](https://github.com/tanqhnguyen/2048-engine)
 
-## Bonus!
+## CLI!!!
 I also add a simple CLI to play the game, just for the fun of it (and also for testing!). You can run it by `npm start`
 
 WARNING! It looks horrible

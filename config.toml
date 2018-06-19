@@ -1,7 +1,7 @@
 theme="hugo-geo"
 languageCode = "en-us"
 title = "Tan Nguyen"
-baseurl = "http://tannguyen.org/"
+baseurl = "https://tannguyen.org/"
 paginate = 10
 
 PygmentsCodeFences = true

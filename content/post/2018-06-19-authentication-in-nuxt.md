@@ -3,7 +3,6 @@ date = "2018-06-19T11:52:29+02:00"
 title = "Authentication in nuxtjs"
 tags = ['nuxtjs', 'javascript']
 categories = ['Programming']
-draft = true
 +++
 
 I have been watching Vue from the distance for some time, and I have decided to jump into the hype train to take a closer look at Vue and its ecosystem after reading about [nuxtjs](https://nuxtjs.org/). Nuxt is built on top of Vue to make server-side rendering great again. Server-side rendering was a hot topic few years ago. Maybe it has always been hot but I just don't pay attention. Anyway, Nuxt offers a very simple (but powerful) way to do server-side rendering using Vue's infrastructure and components. In this blog post, I am going to describe how I do authentication in nuxt, it's using a different approach than the official [auth example](https://nuxtjs.org/examples/auth-external-jwt)

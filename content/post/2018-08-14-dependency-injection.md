@@ -3,7 +3,6 @@ date = "2018-08-14T11:52:29+02:00"
 title = "Dependency injection, why does it matter?"
 tags = ['javascript']
 categories = ['Programming']
-draft = true
 +++
 
 Dependency injection is one of the basic programming principles that I learned and still remember. It's a very useful principle but I don't see it being used widely in the Javascript world. From all the Javascript libraries and frameworks that I have used before, only Angular 1 and Loopback force the use of dependency injection. In this blog post, I am going to discuss dependency injection and why is it important for medium to large projects.

@@ -6,7 +6,7 @@
 		<h1>{{ .Title }}</a></h1>
 	</header>
 <ul>
-	{{ range .Data.Pages }}
+	{{ range .Site.RegularPages }}
 	<li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
 	{{ end }}
 </ul>

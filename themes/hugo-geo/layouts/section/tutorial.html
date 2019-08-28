@@ -6,7 +6,7 @@
 		<h1>{{ .Title }}</a></h1>
 	</header>
 	
-	{{ range .Data.Pages }}
+	{{ range .Site.RegularPages }}
 	{{ if .Params.index }}
         <div class="panel panel-default">
         	<div class="panel-header">

@@ -1,9 +1,10 @@
 #!/bin/bash
+HOST=tannguyen.org
 hugo
-ssh dokku@tannguyen.org apps:create blog
-ssh dokku@tannguyen.org domains:add blog tannguyen.org
-ssh dokku@tannguyen.org config:set --no-restart blog DOKKU_LETSENCRYPT_EMAIL=tan.qh.nguyen@gmail.com
-ssh dokku@tannguyen.org letsencrypt blog
+ssh dokku@${HOST} apps:create blog
+ssh dokku@${HOST} domains:add blog tannguyen.org
+ssh dokku@${HOST} config:set --no-restart blog DOKKU_LETSENCRYPT_EMAIL=tan.qh.nguyen@gmail.com
+ssh dokku@${HOST} letsencrypt blog
 touch public/.static
 cp -fv .dokku/* public
-tar c public | ssh dokku@tannguyen.org tar:in blog
+tar c public | ssh dokku@${HOST} tar:in blog

@@ -1,3 +1,15 @@
 #post img {
   max-width: 100%;
 }
+
+.img {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 2rem 0;
+}
+
+.cp_embed_wrapper {
+  margin: 2rem 0;
+}

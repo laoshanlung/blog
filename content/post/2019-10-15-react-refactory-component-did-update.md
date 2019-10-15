@@ -24,7 +24,7 @@ Anyway, one of the common patterns we have in our code base is to use `component
 
 In this example, I use `simulateFluxFlow` to simulate our Redux flow where we have the typical action and reducer to handle the API call and pass the result or any loading indicator as props to the "container" component.
 
-`NameInput` is a pure graphical component which knows nothing about the logic to handle its state. `NameInputLogic` as the name implies encapsulate all the state management of `NameInput`. In reality, depending on how complicated the logic is, we put them into a higher order component (like `NameInputLogic`) or in the reducer. My goal is to refactor `NameInputLogic` to use React hooks. The first thing to be refactored is the state, with `useState`, we can get rid of `React.Component` and instead go for the functional one.
+`NameInput` is a pure graphical component which knows nothing about the logic to handle its state. `NameInputLogic` as the name implies encapsulates all the state management of `NameInput`. In reality, depending on how complicated the logic is, we put them into a higher order component (like `NameInputLogic`) or in the reducer. My goal is to refactor `NameInputLogic` to use React hooks. The first thing to be refactored is the state, with `useState`, we can get rid of `React.Component` and instead go for the functional one.
 
 ```js
 function NameInputLogic(props) {
@@ -97,6 +97,8 @@ function NameInputLogic(props) {
 ```
 
 The 2nd parameter passed to `useEffect` tells it to listen to changes happened to the provided "values". I don't know yet how they detect that but let's just trust that React knows. And that's everything we need to do in order to replace `componentDidUpdate` with React hooks. I am pretty sure there are better ways to do it but right now this solution is good enough.
+
+And last but not least, the code. Happy refactoring!
 
 <p class="codepen" data-height="265" data-theme-id="0" data-default-tab="js,result" data-user="tanqhnguyen" data-slug-hash="poobvGZ" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Refactor componentDidUpdate">
   <span>See the Pen <a href="https://codepen.io/tanqhnguyen/pen/poobvGZ">

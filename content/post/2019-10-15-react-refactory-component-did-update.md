@@ -14,7 +14,7 @@ We have recently updated to React 16.8 after more than 1 year stuck with the old
 
 Before I write anything, I have to admit that despite all the good things React hooks bring to the table, I still think that it has too much magic behind the scene. For example, `useState` looks very simple but the fiber architecture to support it is much more complicated. It reminds me a lot about the time when I approached Ruby on Rails. Its magic can be good or bad depending on the situation.
 
-Anyway, one of the common patterns we have in our code base is to use `componentDidUpdate` to reset some state after an API call finishes. For example, in an input field, we want to change it from "editting" state to "static" state after its value has been saved.
+Anyway, one of the common patterns we have in our code base is to use `componentDidUpdate` to reset some state after an API call finishes. For example, in an input field, we want to change it from "editing" state to "static" state after its value has been saved.
 
 <p class="codepen" data-height="265" data-theme-id="0" data-default-tab="js,result" data-user="tanqhnguyen" data-slug-hash="VwwjwRR" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="VwwjwRR">
   <span>See the Pen <a href="https://codepen.io/tanqhnguyen/pen/VwwjwRR">
@@ -28,18 +28,18 @@ In this example, I use `simulateFluxFlow` to simulate our Redux flow where we ha
 
 ```js
 function NameInputLogic(props) {
-  const [isEditting, setIsEditting] = useState(false);
+  const [isediting, setIsediting] = useState(false);
   const [value, setValue] = useState('');
 
   return <NameInput
     value={value}
-    isEditting={isEditting}
+    isediting={isediting}
     isLoading={props.isLoading}
     onChange={(value) => {
       setValue(value);
     }}
     onEdit={() => {
-      setIsEditting(true);
+      setIsediting(true);
     }}
     onSave={() => {
       props.submitValue(value);
@@ -48,7 +48,7 @@ function NameInputLogic(props) {
 }
 ```
 
-A lot simpler than before, but... it doesn't exactly do what we want it to do because the input is still in "editting" mode after we save it.
+A lot simpler than before, but... it doesn't exactly do what we want it to do because the input is still in "editing" mode after we save it.
 
 <p class="codepen" data-height="265" data-theme-id="0" data-default-tab="js,result" data-user="tanqhnguyen" data-slug-hash="MWWeYXB" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Refactored to use useState">
   <span>See the Pen <a href="https://codepen.io/tanqhnguyen/pen/MWWeYXB">
@@ -78,7 +78,7 @@ That solves the first part where we need to get the previous value to compare wi
 
 ```js
 function NameInputLogic(props) {
-  const [isEditting, setIsEditting] = useState(false);
+  const [isediting, setIsediting] = useState(false);
   const [value, setValue] = useState('');
 
   const {
@@ -88,7 +88,7 @@ function NameInputLogic(props) {
   const prevIsLoading = usePrevious(isLoading);
   useEffect(() => {
     if (prevIsLoading && !isLoading) {
-      setIsEditting(false);
+      setIsediting(false);
     }
   }, [isLoading]);
 
